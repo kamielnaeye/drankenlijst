@@ -7,8 +7,26 @@
         <form action="/post" method="POST">
             <label>NAME:<input name="naam"></input></label>
             <br>
-            <label>Tekst:<textarea name="post"></textarea></label>
+            <label>Prijs:<input name="prijs"></input></label>
+            <br>
+            <label>Url:<input name="url"></input></label>
             <button type="submit">Send</button>
         </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="socket.io.js"></script>
+    <script>
+    //connectie met mqtt maken    
+    $(function () {
+            var socket = io();
+            $('form').submit(function(e){
+                socket.emit('chat message','er is een nieuw drank toegevoegd!');
+                return false;
+            });
+            socket.on('chat message', function(msg){
+                alert(msg);
+            });
+    });
+    </script>
+        
     </body>
 </html>
